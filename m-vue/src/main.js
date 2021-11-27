@@ -3,12 +3,19 @@ import {createRouter, createWebHistory} from 'vue-router'
 import App from './App.vue'
 import routes from './router'
 
+import actions from "./shared/actions";
+
 // 不能直接挂载，需要在主应用切换的时候，调用mount的时候挂载
 // createApp(App).mount('#app')
 let history
 let router
 let app
 function render (props = {}) {
+  if (props) {
+    // 注入 actions 实例
+    actions.setActions(props);
+  }
+
   history = createWebHistory('/vue')
   router = createRouter({
     history,
@@ -31,6 +38,10 @@ export async function bootstrap() {
 }
 export async function mount(props) {
   console.log('vue3 app mount', props)
+  // if (props) {
+  //   // 注入 actions 实例
+  //   actions.setActions(props);
+  // }
   render(props)
 }
 export async function unmount() {

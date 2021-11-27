@@ -1,4 +1,5 @@
 import { registerMicroApps, start } from 'qiankun'
+import {login} from './apis/login'
 const loader = (loading) => {
   console.log('loading', loading)
 }
@@ -27,13 +28,15 @@ registerMicroApps(
       console.log('挂载前')
     },
     afterMount: () => {
-      console.log('挂载前')
+      console.log('挂载后')
+      login()
+      // actions.setGlobalState({ userInfo })
     },
     beforeUnmount: () => {
       console.log('销毁前')
     },
     afterUnmount: () => {
-      console.log('销毁前')
+      console.log('销毁后')
     },
   }
 )

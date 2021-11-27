@@ -7,10 +7,19 @@
 </template>
 
 <script>
-
-export default {
-  name: 'App'
-}
+import { defineComponent } from "vue";
+import actions from "./shared/actions";
+export default defineComponent({
+  name: 'App',
+  setup() {
+    // 注册观察者函数
+    // onGlobalStateChange 第二个参数为 true，表示立即执行一次观察者函数
+    actions.onGlobalStateChange(state => {
+      const { userInfo } = state;
+      console.log('userInfo', userInfo)
+    }, false);
+  }
+})
 </script>
 
 <style>
